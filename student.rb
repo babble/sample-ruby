@@ -10,10 +10,11 @@ class Object
 end
 
 action = $request.action.downcase
+data = {}
 
 if action == "list"
-  ss = Student.find().limit(50).sort(:name => 1)
-  require 'views/students'
+  data['ss'] = Student.find().limit(50).sort(:name => 1)
+  $djang10.get_template('/views/students').call(data)
   return
 end
 
@@ -24,7 +25,7 @@ if action == "delete"
   return
 end
     
-courses = Course.find
+data['courses'] = Course.find
 msg = ''
 
 if action == "save"
@@ -34,13 +35,13 @@ if action == "save"
   end
         
   my_student.save
-  msg = "Saved"
+  data['msg'] = "Saved"
 end
     
 if action == "add" && $request.course_for
   c = Course.findOne($request.course_for)
   if !c
-    msg = "Can't find course"
+    data['msg'] = "Can't find course"
   else
     my_student.add_score(c , $request.score)
     my_student.save
@@ -50,6 +51,6 @@ end
 # TODO
 my_student._form = $Forms.Form(my_student , "s_")
     
-s = my_student
-    
-require 'views/student'
+data['s'] = my_student
+
+$djang10.get_template('/views/student').call(data)
