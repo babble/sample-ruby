@@ -1,0 +1,8 @@
+Several sample sites using Ruby on 10gen.
+
+Right now the only site included is the "basic" site. This is meant as a proof
+of concept of a Ruby site running on 10gen. Implementations of tutorials for
+Ruby are forthcoming.
+
+Tutorial documentation can also be reached from our main developer documentation
+page, here: http://www.10gen.com/wiki/DevDocumentation
