@@ -10,7 +10,7 @@ class Object
 end
 
 courses = Course.find().limit(100).sort(:name => 1)
-template = 'views/courses'
+template = '/views/courses'
 
 course = Course.find(:first, $request['c__id']) if $request['c__id']
 
@@ -35,13 +35,12 @@ end
 if course
   # TODO
   course._form = $Forms.Form(course , "c_")
-  template = 'views/course'
+  template = '/views/course'
 end
 
 data = {}
 
-cs = courses
-c = course if course
+data['cs'] = courses
+data['c'] = course if course
 
-# TODO arguments
-require 'template'
+$djang10.get_template(template).call(data)
