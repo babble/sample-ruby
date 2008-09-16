@@ -1,6 +1,7 @@
 
 # install some libraries
 
+#FIXME: use require instead of calling the files
 $core["content"].forms;
 #$core["db"].modelBase;
 
