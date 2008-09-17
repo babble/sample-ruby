@@ -48,6 +48,7 @@ end
 
 data = {}
 
+#FIXME: remove when toArray call works in js
 data['cs'] = courses.to_a
 data['c'] = course if course
 
