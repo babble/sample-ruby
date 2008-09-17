@@ -19,21 +19,25 @@ action = action.downcase
 case action
 when "list"
   # already set up (the find() above that set courses)
+
 when "delete"
   if course
     course.remove
   end
   course = nil
+
 when "edit"
   # Nothing to do yet
+
 when "save"
-  
   course ||= Course.new
   $Forms.fillInObject("c_" , course , $request)
   course.save
   course = nil
+
 when "new"
   course = Course.new
+
 end
 
 if course
