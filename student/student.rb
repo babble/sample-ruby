@@ -1,4 +1,5 @@
 require 'models/student'
+require 'models/course'
 
 # DEBUG
 class Object
@@ -6,10 +7,13 @@ class Object
     msg = "method_missing: symbol = #{sym}, args = #{args.join(', ')}, class of self = #{self.class.name}"
     puts "<p style='color:red;'>#{msg}</p>"
     $stderr.puts "**** #{msg}"
+    raise "method not there"
   end
 end
 
-action = $request.action.downcase
+action = $request["action"] || ""
+action = action.downcase
+
 data = {}
 
 if action == "list"
@@ -18,27 +22,28 @@ if action == "list"
   return
 end
 
-my_student = Student.find($request.s__id)
+my_student = Student.find(:first, $request["s__id"]) || Student.new
+
 if action == "delete"
   my_student.remove
   $response.sendRedirectTemporary("/students")
   return
 end
-    
-data['courses'] = Course.find
-msg = ''
+
+#FIXME: remove when js toArray works
+data['courses'] = Course.find().to_a
 
 if action == "save"
   $Forms.fillInObject("s_" , my_student , $request)
   if my_student._new
-    my_student._new = nil
+    my_student._new = false
   end
         
   my_student.save
   data['msg'] = "Saved"
 end
     
-if action == "add" && $request.course_for
+if action == "add" && $request.has_key?("course_for") && $request.has_key?("score")
   c = Course.findOne($request.course_for)
   if !c
     data['msg'] = "Can't find course"
@@ -48,8 +53,8 @@ if action == "add" && $request.course_for
   end
 end
     
-# TODO
-my_student._form = $Forms.Form(my_student , "s_")
+# FIXME: remove this when constructors work
+my_student._form = $newFormsForm.call(my_student , "s_")
     
 data['s'] = my_student
 
