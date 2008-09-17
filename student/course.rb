@@ -14,7 +14,9 @@ template = '/views/courses'
 
 course = Course.find(:first, $request['c__id']) if $request['c__id']
 
-case $request.action.downcase
+action = $request["action"] || ""
+action = action.downcase
+case action
 when "list"
   # already set up (the find() above that set courses)
 when "delete"
@@ -24,23 +26,24 @@ when "delete"
 when "edit"
   # Nothing to do yet
 when "save"
+  
   course ||= Course.new
-  $Forms.fillInObject("c_" , data.c , $request)
+  $Forms.fillInObject("c_" , course , $request)
   course.save
-  course.delete
+  course = nil
 when "new"
   course = Course.new
 end
 
 if course
-  # TODO
-  course._form = $Forms.Form(course , "c_")
+  # FIXME: remove this when constructors work
+  course._form = $newFormsForm.call(course , "c_")
   template = '/views/course'
 end
 
 data = {}
 
-data['cs'] = courses
+data['cs'] = courses.to_a
 data['c'] = course if course
 
 $djang10.get_template(template).call(data)
