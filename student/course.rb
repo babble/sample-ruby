@@ -23,6 +23,7 @@ when "delete"
   if course
     course.remove
   end
+  course = nil
 when "edit"
   # Nothing to do yet
 when "save"
