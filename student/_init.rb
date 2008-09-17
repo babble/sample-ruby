@@ -12,7 +12,7 @@ $core["content"].forms;
 $core["core"].routes;
 
 # FIXME: remove this when constructors work
-require "hacks"
+require "/local/hacks"
 
 # setup routing
 # FIXME: use the constructor
