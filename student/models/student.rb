@@ -1,3 +1,5 @@
+require "models/utils"
+
 class Student < XGen::Mongo::Base
 
   set_collection :students, %w(name email address scores)
