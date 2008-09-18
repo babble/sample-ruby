@@ -7,6 +7,7 @@ class Student < XGen::Mongo::Base
   def initialize(row=nil)
     super
     @scores = []
+    @address = Address.new
   end
 
   def summary
