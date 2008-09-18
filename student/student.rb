@@ -1,6 +1,8 @@
 require 'models/student'
 require 'models/course'
 
+
+
 # DEBUG
 class Object
   def method_missing sym, *args
@@ -22,7 +24,8 @@ if action == "list"
   return
 end
 
-my_student = Student.find(:first, $request["s__id"]) || Student.new
+my_student = Student.find(:first, $request["s__id"]) if $request["s__id"] 
+my_student ||= Student.new
 
 if action == "delete"
   my_student.remove
