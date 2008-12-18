@@ -12,12 +12,9 @@ class MyModel
   end
 
   def self.find(name)
-    t = Struct.new(:name).new(name)
-    # This also works:
-    # t = {:name => name}
-    return $db.ms.findOne(t)
+    return $db.things.findOne({:name => name})
   end
 
 end
 
-$db.ms.setConstructor(MyModel)
+$db.things.setConstructor(MyModel)

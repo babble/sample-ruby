@@ -11,7 +11,7 @@ else
   else
     m = MyModel.new($request.name)
   end
-  $db.ms.save(m)
+  $db.things.save(m)
 
   puts "name: <b>#{ m.name }</b><br>"
   puts "count: <b>#{ m.counter.to_i }</b><br>"

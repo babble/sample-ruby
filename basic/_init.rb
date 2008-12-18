@@ -15,5 +15,5 @@ $mapUrlToJxpFile = Proc.new { |uri, req|
   if uri =~ /^.(\w+)$/
     req['name'] = $1
   end
-  "/controller.rb"
+  "controller.rb"
 }
