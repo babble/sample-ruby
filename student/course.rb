@@ -9,10 +9,10 @@ class Object
   end
 end
 
-courses = Course.find().limit(100).sort(:name => 1)
+courses = Course.find(:all, :limit => 100, :order => :name)
 template = '/views/courses'
 
-course = Course.find(:first, $request['c__id']) if $request['c__id']
+course = Course.find($request['c__id']) if $request['c__id']
 
 action = $request["action"] || ""
 action = action.downcase

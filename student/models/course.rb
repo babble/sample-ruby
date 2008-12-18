@@ -1,6 +1,10 @@
+require 'xgen/mongo/base'
+
 class Course < XGen::Mongo::Base
 
-  set_collection :courses, %w(name)
+  collection_name :courses
+  field :name
+  attr_accessor :_form          # for JavaScript form library
 
   def to_s
     "Course #{name}"

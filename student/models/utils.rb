@@ -1,11 +1,14 @@
 # This contains objects that aren't first-class (don't have their own
 # collection in the database).
+#
+# Using XGen::Mongo::Subobject is optional; these could use XGen::Mongo::Base.
 
-class Address
+require 'xgen/mongo/subobject'
+require 'models/course'
 
-  def initialize(s="", c="", st="", pc="")
-    @street, @city, @state, @postal_code = s, c, st, pc
-  end
+class Address < XGen::Mongo::Subobject
+
+  fields :street, :city, :state, :postal_code
 
   def to_s
     "#{street}\n#{city}, #{state} #{postal_code}"
@@ -14,11 +17,10 @@ class Address
 end
 
 # Grade for a class
-class Score
+class Score < XGen::Mongo::Subobject
 
-  def initialize(course, grd)
-    @for_course, @grade = course, grd
-  end
+  field :grade
+  has_one :for_course, :class_name => "Course"
 
   def passed?
     @grade >= 2.0

@@ -26,7 +26,6 @@
   <fieldset>  
   <% if not $c._id %>
     <legend>New Course</legend>
-  <%= $c._form.hidden( "_new" , true ) %>
   <% end %>
 
   <%= $c._form.id() %>

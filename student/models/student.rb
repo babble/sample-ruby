@@ -1,13 +1,17 @@
+require 'xgen/mongo/base'
 require "models/utils"
 
 class Student < XGen::Mongo::Base
 
-  set_collection :students, %w(name email address scores)
+  collection_name :students
+  fields :name, :email
+  has_one :address, :class_name => "Address"
+  has_many :scores, :class_name => "Score"
+  attr_accessor :_form          # for JavaScript form library
 
   def initialize(row=nil)
     super
-    @scores = []
-    @address = Address.new
+    @address ||= Address.new
   end
 
   def summary
@@ -19,6 +23,6 @@ EOS
   end
 
   def add_score(course, grade)
-    @scores << Score.new(course, grade)
+    @scores << Score.new(:for_course => course, :grade => grade)
   end
 end

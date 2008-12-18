@@ -26,7 +26,6 @@
   <fieldset>  
   {% if not s._id %}
     <legend>New User</legend>
-  <%= s._form.hidden( "_new" , true ) %>
   {% end %}
 
   <%= s._form.id() %>
@@ -47,7 +46,7 @@
     <%= s._form.text( "address.state" ) %><br />
 
 	<label>Postal Code</label>
-    <%= s._form.text( "address.postalCode" ) %><br />
+    <%= s._form.text( "address.postal_code" ) %><br />
     
 	<label></label>
   	<%= s._form.submit( "action" , "Save" ) %><br />

@@ -19,12 +19,12 @@ action = action.downcase
 data = {}
 
 if action == "list"
-  data['ss'] = Student.find().limit(50).sort(:name => 1)
+  data['ss'] = Student.find(:all, :limit => 50, :sort => :name)
   $djang10.get_template('/views/students').call(data)
   return
 end
 
-my_student = Student.find(:first, $request["s__id"]) if $request["s__id"] 
+my_student = Student.find($request["s__id"]) if $request["s__id"] 
 my_student ||= Student.new
 
 if action == "delete"
@@ -34,20 +34,17 @@ if action == "delete"
 end
 
 #FIXME: remove when js toArray works
-data['courses'] = Course.find().to_a
+data['courses'] = Course.find(:all).to_a
 
 if action == "save"
   $Forms.fillInObject("s_" , my_student , $request)
-  if my_student._new
-    my_student._new = false
-  end
         
   my_student.save
   data['msg'] = "Saved"
 end
     
 if action == "add" && $request.has_key?("course_for") && $request.has_key?("score")
-  c = Course.findOne($request.course_for)
+  c = Course.find($request.course_for)
   if !c
     data['msg'] = "Can't find course"
   else

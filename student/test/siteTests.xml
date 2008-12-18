@@ -57,7 +57,7 @@
             <setInputField name="s_address.street" value="100 Park Place"/>
             <setInputField name="s_address.city" value="New York"/>
             <setInputField name="s_address.state" value="NY"/>
-            <setInputField name="s_address.postalCode" value="11111"/>
+            <setInputField name="s_address.postal_code" value="11111"/>
             <clickButton label="Save"/>
             <xMatch text="Student Editing"/>
             <xMatch text="Scores"/>
@@ -90,7 +90,7 @@
             <setInputField name="s_address.street" value="29 Superbowl Dr"/>
             <setInputField name="s_address.city" value="Hoboken"/>
             <setInputField name="s_address.state" value="NJ"/>
-            <setInputField name="s_address.postalCode" value="12345"/>
+            <setInputField name="s_address.postal_code" value="12345"/>
             <clickButton label="Save"/>
             <xMatch text="Student Editing"/>
             <xMatch text="Scores"/>
